@@ -1,0 +1,43 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Emissioncontroller : MonoBehaviour
+{
+    private ParticleSystem ps;
+    //パーティクルシステムの放出モジュール
+    ParticleSystem.EmissionModule emission;
+    public bool moduleEnabled;
+    // Start is called before the first frame update
+    void Start()
+    {
+
+        ps = GetComponent<ParticleSystem>();
+        emission = ps.emission;
+        //開始時放出したくないので、は放出用のブールをfalseにしておく
+        moduleEnabled = false;
+        //ブールのオンオフで放出のオンオフを切り替え
+        emission.enabled = moduleEnabled;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+       
+        //放出する条件式
+        if (Input.GetAxis("Vertical") > 0.8)
+        {
+            moduleEnabled = true;
+           // Debug.Log("Emission:true");
+        }
+        else
+        {
+            moduleEnabled = false;
+           // Debug.Log("Emission:false");
+        }
+
+        //ブールのオンオフで放出のオンオフを切り替え
+        emission.enabled = moduleEnabled;
+
+    }
+}
